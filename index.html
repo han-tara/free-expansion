@@ -1,0 +1,66 @@
+<script src="https://cdn.tailwindcss.com"></script>
+
+<body class="m-0 flex justify-center items-center bg-black text-white font-serif">
+    <div class="overflow-hidden">
+        <div class="w-full text-center text-2xl py-4">
+            Free Expansion (irrevisible)
+        </div>
+        <canvas class="border-white border-4" id="canvas"></canvas>
+        <div class="text-lg pt-2" id="p1">Container 1: 100</div>
+        <div class="text-lg py-1" id="p2">Container 2: 0</div>
+        <div class="text-lg" id="dp">P1/P2: 30</div>
+    </div>
+</body>
+
+<script>
+    //canvas setup - change width and height as your wish
+    const canvas = document.getElementById('canvas')
+    const ctx = canvas.getContext('2d')
+    canvas.width = 600
+    canvas.height = 300
+
+    //system grid sizes 
+    const numC = 300
+    const numR = 150
+
+    //init system array
+    let system = []
+    for (let r = 0; r < numR; r++) {
+        let col = []
+        for (let c = 0; c < numC * 2; c++) { //column *2 for make it full size
+            col.push(0)
+            console.log('bruhh')
+        }
+        system.push(col)
+    }
+    const clearSystem = system
+    console.log(clearSystem)
+
+
+    //define particle
+    const numParticle = 100000
+    const avgVelocity = 100
+    const particles = []
+    for (let i = 0; i < numParticle; i++) {
+        const ranDir = Math.round(Math.random() * 360) * 0.0174533
+        particles.push(
+            {
+                //starting particles feel entire container 1
+                // x: Math.round(Math.random()*canvas.width/2), 
+                // y: Math.round(Math.random()*canvas.height),
+
+                //starting particles from the middle
+                // x: canvas.width/2,
+                // y: canvas.height/2,
+
+                //starting particles from top edge
+                x: canvas.width/5,
+                y: canvas.height/2.5,
+
+                //starting velocity
+                vx: (Math.random() * avgVelocity + avgVelocity/2)*Math.cos(ranDir), 
+                vy: (Math.random() * avgVelocity + avgVelocity/2) *Math.sin(ranDir) 
+            })
+    }
+</script>
+<script src="animation.js"></script>
